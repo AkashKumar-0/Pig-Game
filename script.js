@@ -25,10 +25,20 @@ let init = function () {
   currentScore = 0;
   activePlayer = 0;
   score = [0, 0];
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
 
   diceEl.classList.add('hidden');
 };
 init();
+
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
 //rolling dice functionallity
 btnRoll.addEventListener('click', function () {
   if (
@@ -58,10 +68,7 @@ btnRoll.addEventListener('click', function () {
     currentScore = score[activePlayer];
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     //switch to next player
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    //switch the background focus
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+    switchPlayer();
   }
 });
 
